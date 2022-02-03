@@ -130,6 +130,7 @@ export default function SideNavbar({ children }) {
                   backgroundColor: "#46b6ff",
                 },
               }}
+              onClick={() => window.alert("Work In Progress")}
             >
               <ListItemIcon sx={{ minWidth: "46px" }}>
                 <key.icon sx={{ fontSize: "20px", color: "#1252ae" }} />
