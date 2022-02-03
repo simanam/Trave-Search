@@ -16,8 +16,6 @@ import useStyles from "./styles.js";
 import { deepOrange } from "@mui/material/colors";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PlaceDetailCard from "../PlaceDetails/placeDetails";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 const PlacesList = ({
   places,
@@ -31,12 +29,6 @@ const PlacesList = ({
   const classes = useStyles();
 
   const [elRefs, setElRefs] = useState([]);
-  useEffect(() => {
-    AOS.init({
-      duration: 2000,
-      anchorPlacement: "bottom - top",
-    });
-  }, []);
 
   console.log({ childClicked });
 
@@ -51,7 +43,12 @@ const PlacesList = ({
     <>
       <Box className={classes.topBox}>
         <Typography variant="subtitle1" className={classes.discover}>
-          Discover {`>`}
+          Discover {`>`}{" "}
+          <strong>
+            <span style={{ color: "#1252ae" }}>
+              {places[0]?.location_string}
+            </span>
+          </strong>
         </Typography>
         <div className={classes.avatarNoti}>
           <NotificationsNoneIcon />

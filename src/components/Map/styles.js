@@ -2,11 +2,15 @@ import { alpha, makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   paper: {
-    padding: "10px",
+    position: "relative",
+    padding: "5px",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "center",
-    width: "100px",
+    width: "auto",
+    // minWidth: "200px",
+    bottom: "6em",
+    justifyContent: "space-between",
   },
   mapContainer: {
     height: "100vh",
@@ -24,6 +28,8 @@ export default makeStyles((theme) => ({
   },
   pointer: {
     cursor: "relative",
+    width: "50px",
+    height: "50px",
   },
   search: {
     position: "relative",
@@ -56,5 +62,17 @@ export default makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: { width: "20ch" },
+  },
+  ringContainer: {
+    position: "relative",
+  },
+  mapCardBox: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    marginLeft: "5px",
+  },
+  mapCardName: {
+    fontWeight: "1000px",
   },
 }));

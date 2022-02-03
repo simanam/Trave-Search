@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import PlaceList from "../components/placesList/placesList";
-import PlaceListClass from "../components/placesList/placeListClass";
+
 import Map from "../components/Map/map";
-import { getPlacesData } from "../api";
+import { getPlacesData, getWeatherData } from "../api";
 import useStyles from "./styles.js";
 
 const Home = () => {
   const classes = useStyles();
+  const [weatherData, setWeatherData] = useState([]);
   const [places, setPlaces] = useState([]);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [childClicked, setChildClicked] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -31,12 +33,17 @@ const Home = () => {
   }, [rating]);
 
   useEffect(() => {
-    if (bounds) {
+    if (bounds.ne && bounds.sw) {
       setIsLoading(true);
+      getWeatherData(coordinates.lat, coordinates.lng).then((data) =>
+        setWeatherData(data)
+      );
 
       getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
+        console.log(data);
         setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
         setFilteredPlaces([]);
+        setRating("");
         setIsLoading(false);
       });
     }
@@ -54,7 +61,6 @@ const Home = () => {
           rating={rating}
           setRating={setRating}
         />
-        {/* <PlaceListClass places={places} /> */}
       </Grid>
 
       <Grid item xs={12} md={6}>
@@ -64,6 +70,9 @@ const Home = () => {
           coordinates={coordinates}
           places={filteredPlaces.length ? filteredPlaces : places}
           setChildClicked={setChildClicked}
+          weatherData={weatherData}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
         />
       </Grid>
     </>

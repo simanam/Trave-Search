@@ -35,7 +35,7 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         }
         title={place.name}
       />
-      <Box>
+      <Box className={classes.cardContentBox}>
         <CardContent className={classes.cardContent}>
           {/* {place?.cuisine?.map(({ name }) => (
             <Chip
@@ -106,7 +106,7 @@ const PlaceDetails = ({ place, selected, refProp }) => {
               variant="body2"
               className={classes.distance}
             >
-              <LocationOnIcon /> {parseFloat(place.distance).toFixed(2)} mi
+              {place.num_reviews} review{place.num_reviews > 1 && "s"}
             </Typography>
           </Box>
         </CardContent>
